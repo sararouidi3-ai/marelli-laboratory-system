@@ -1,0 +1,42 @@
+[
+  {
+    "id": "LAB-2026-06-01-001",
+    "demandeur": "Chakir Oualgouh",
+    "emailDemandeur": "chakir.oualgouh@marelli.com",
+    "departement": "R&D Automotive",
+    "reference": "ECU-VAL-2026-X",
+    "dateDemande": "01/06/2026",
+    "typeDemande": "Essai",
+    "objet": "Test de choc thermique sur boîtier ECU Marelli de nouvelle génération.",
+    "destinataire": "chakir.oualgouh@marelli.com",
+    "statut": "Acceptée",
+    "dateRealisation": "02/06/2026",
+    "tempsPasse": "3h15",
+    "realisePar": "Assiya Rouidi",
+    "commentaire": "Simulation thermique réussie, aucune anomalie structurelle détectée sur le composant."
+  },
+  {
+    "id": "LAB-2026-06-02-001",
+    "demandeur": "Assiya Rouidi",
+    "emailDemandeur": "assiya.rouidi@marelli.com",
+    "departement": "Qualité Maroc",
+    "reference": "SENSOR-PT-99",
+    "dateDemande": "02/06/2026",
+    "typeDemande": "Intervention",
+    "objet": "Étalonnage du capteur de pression d'admission sur banc de test principal.",
+    "destinataire": "assiya.rouidi@marelli.com",
+    "statut": "En attente"
+  },
+  {
+    "id": "LAB-2026-06-03-001",
+    "demandeur": "Sara Rouidi",
+    "emailDemandeur": "rouidisara881@gmail.com",
+    "departement": "Validation Lab",
+    "reference": "VALVE-CTRL-01",
+    "dateDemande": "03/06/2026",
+    "typeDemande": "Essai",
+    "objet": "Mesures du flux pneumatique résiduel.",
+    "destinataire": "sararouidi3@gmail.com",
+    "statut": "En attente"
+  }
+]

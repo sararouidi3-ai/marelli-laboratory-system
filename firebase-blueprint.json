@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "Demande": {
+      "title": "Laboratory Request",
+      "description": "Represents a laboratory testing or intervention request for MARELLI Laboratory.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique request ID format LAB-YYYY-MM-DD-XXX"
+        },
+        "demandeur": {
+          "type": "string",
+          "description": "Name of the request creator"
+        },
+        "departement": {
+          "type": "string",
+          "description": "Originating department"
+        },
+        "reference": {
+          "type": "string",
+          "description": "Part or material reference number"
+        },
+        "dateDemande": {
+          "type": "string",
+          "description": "Date of request in DD/MM/YYYY format"
+        },
+        "typeDemande": {
+          "type": "string",
+          "enum": ["Essai", "Intervention"],
+          "description": "Type of request"
+        },
+        "objet": {
+          "type": "string",
+          "description": "Main objective of the request"
+        },
+        "destinataire": {
+          "type": "string",
+          "description": "Primary review validator email"
+        },
+        "emailExterne": {
+          "type": "string",
+          "description": "Optional external email recipient"
+        },
+        "messageSupplementaire": {
+          "type": "string",
+          "description": "Optional additional message"
+        },
+        "statut": {
+          "type": "string",
+          "enum": ["En attente", "Acceptée", "Refusée"],
+          "description": "Current authorization or testing status"
+        },
+        "dateRealisation": {
+          "type": "string",
+          "description": "Date when testing or intervention was executed"
+        },
+        "tempsPasse": {
+          "type": "string",
+          "description": "Time spent on executing this request"
+        },
+        "realisePar": {
+          "type": "string",
+          "description": "Person who completed the tests"
+        },
+        "commentaire": {
+          "type": "string",
+          "description": "Final review or execution remarks"
+        },
+        "motifRefus": {
+          "type": "string",
+          "description": "Rejection reason"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp"
+        }
+      },
+      "required": ["id", "demandeur", "departement", "reference", "dateDemande", "typeDemande", "objet", "destinataire", "statut"]
+    }
+  },
+  "firestore": {
+    "demandes/{demandeId}": {
+      "schema": "Demande",
+      "description": "Stores individual laboratory assay requests"
+    }
+  }
+}

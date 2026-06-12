@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 64 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation for Demande entities
+    function isValidDemande(data) {
+      return data.id is string && data.id.size() <= 64
+        && data.demandeur is string && data.demandeur.size() > 0 && data.demandeur.size() <= 100
+        && data.departement is string && data.departement.size() > 0 && data.departement.size() <= 100
+        && data.reference is string && data.reference.size() > 0 && data.reference.size() <= 100
+        && data.dateDemande is string && data.dateDemande.size() > 0 && data.dateDemande.size() <= 20
+        && (data.typeDemande == 'Essai' || data.typeDemande == 'Intervention')
+        && data.objet is string && data.objet.size() > 0 && data.objet.size() <= 2000
+        && data.destinataire is string && data.destinataire.size() > 0 && data.destinataire.size() <= 150
+        && (data.statut == 'En attente' || data.statut == 'Acceptée' || data.statut == 'Refusée');
+    }
+
+    match /demandes/{demandeId} {
+      // Allow general get for lookups (Tracing page by ID) and list for dashboards
+      allow read: if true;
+
+      // Allow request creations with strict content check
+      allow create: if isValidId(demandeId) 
+        && incoming().id == demandeId 
+        && incoming().statut == 'En attente'
+        && isValidDemande(incoming());
+
+      // Update checks state transition models
+      allow update: if isValidId(demandeId)
+        && isValidDemande(incoming())
+        && (
+          // Transition to Acceptée
+          (existing().statut == 'En attente' && incoming().statut == 'Acceptée'
+            && incoming().dateRealisation is string
+            && incoming().tempsPasse is string
+            && incoming().realisePar is string)
+          ||
+          // Transition to Refusée
+          (existing().statut == 'En attente' && incoming().statut == 'Refusée'
+            && incoming().motifRefus is string)
+          ||
+          // Keep same status if editing comments / system syncs
+          (existing().statut == incoming().statut)
+        );
+
+      // Disable random deletions of requests
+      allow delete: if false;
+    }
+  }
+}

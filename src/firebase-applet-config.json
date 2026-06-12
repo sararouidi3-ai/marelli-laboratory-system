@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyFakeKeyForLocalCompileOnly12345678",
+  "authDomain": "marelli-lab-request.firebaseapp.com",
+  "projectId": "marelli-lab-request",
+  "storageBucket": "marelli-lab-request.appspot.com",
+  "messagingSenderId": "123456789012",
+  "appId": "1:123456789012:web:a1b2c3d4e5f6g7h8",
+  "firestoreDatabaseId": "(default)"
+}
